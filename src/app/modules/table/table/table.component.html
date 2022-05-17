@@ -1,0 +1,32 @@
+<nz-table #basicTable [nzData]="rows">
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns">
+        <ng-container *ngIf="col.tplHeader; else pureHeader">
+          <ng-template
+            [ngTemplateOutlet]="col.tplHeader.templateRef"
+            [ngTemplateOutletContext]="{ $implicit: col.header }"
+          ></ng-template>
+        </ng-container>
+        <ng-template #pureHeader> {{ col.header }}</ng-template>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td *ngFor="let col of columns">
+        <ng-container *ngIf="col.tplCell; else pureKey">
+          <ng-template
+            *ngTemplateOutlet="
+              col.tplCell.templateRef;
+              context: { $implicit: data, extra: 'something' }
+            "
+          ></ng-template>
+        </ng-container>
+        <ng-template #pureKey>
+          {{ data[col.key] }}
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

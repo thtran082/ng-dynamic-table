@@ -1,0 +1,15 @@
+<app-table [rows]="rows">
+  <ngvn-column header="id" key="id">
+    <ng-template appHeader let-header>
+      <span>
+        {{ header | uppercase }}
+      </span>
+    </ng-template>
+  </ngvn-column>
+  <ngvn-column header="name" key="name"> </ngvn-column>
+  <ngvn-column header="date" key="date">
+    <ng-template appCell let-row>
+      {{ row.date | date }}
+    </ng-template>
+  </ngvn-column>
+</app-table>
